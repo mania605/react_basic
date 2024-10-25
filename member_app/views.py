@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Member
 
@@ -19,4 +19,12 @@ def details(request, id):
   return HttpResponse(loader.get_template('details.html').render(context, request))
 
 
+
+def testing(request):
+  mydata = Member.objects.all()
+  template = loader.get_template('template.html')
+  context = {
+    'mymembers': mydata,
+  }
+  return HttpResponse(template.render(context, request))
 
